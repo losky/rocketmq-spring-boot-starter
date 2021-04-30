@@ -69,7 +69,7 @@ public class RockerMQAutoConfiguration {
     @Configuration()
     @EnableRocketMQ()
     @ConditionalOnMissingBean(name = RocketMQListenerConfigUtils.ROCKET_MQ_LISTENER_ANNOTATION_PROCESSOR_BEAN_NAME)
-    static class EnableKafkaConfiguration {
+    static class EnableRocketMQConfiguration {
 
     }
 }

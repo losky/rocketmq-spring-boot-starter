@@ -4,6 +4,8 @@ import com.eastedu.boot.rocketmq.annotation.MessageMode;
 import com.eastedu.boot.rocketmq.annotation.MessageType;
 import com.eastedu.boot.rocketmq.error.DefaultMessageErrorHandler;
 import com.eastedu.boot.rocketmq.error.MessageErrorHandler;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 /**
  * 抽象
@@ -75,6 +77,7 @@ public abstract class AbstractRocketMQListenerEndpoint implements RocketMQListen
     }
 
     public void setGroupId(String groupId) {
+        Assert.hasText(groupId, "groupId cannot be empty");
         this.groupId = groupId;
     }
 
@@ -84,6 +87,7 @@ public abstract class AbstractRocketMQListenerEndpoint implements RocketMQListen
     }
 
     public void setTopic(String topic) {
+        Assert.hasText(topic, "topic cannot be empty");
         this.topic = topic;
     }
 
@@ -93,7 +97,11 @@ public abstract class AbstractRocketMQListenerEndpoint implements RocketMQListen
     }
 
     public void setTags(String tags) {
-        this.tags = tags;
+        if (!StringUtils.hasText(tags)) {
+            this.tags = "*";
+        } else {
+            this.tags = tags;
+        }
     }
 
     @Override

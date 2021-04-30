@@ -8,7 +8,7 @@ package com.eastedu.boot.rocketmq.config;
 public abstract class RocketMQListenerConfigUtils {
 
     /**
-     * The bean name of the internally managed Kafka listener annotation processor.
+     * The bean name of the internally managed rocketMQ listener annotation processor.
      */
     public static final String ROCKET_MQ_LISTENER_ANNOTATION_PROCESSOR_BEAN_NAME =
             "org.springframework.rocketmq.config.internalRocketMQListenerAnnotationProcessor";

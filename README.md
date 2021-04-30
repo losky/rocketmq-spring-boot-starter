@@ -17,7 +17,14 @@
     </dependencies>
 </dependencyManagement>
 ```
-
+2. 导入
+```xml
+<dependencies>
+    <groupId>com.eastedu.boot</groupId>
+    <artifactId>rocketmq-spring-boot-starter</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependencies>
+```
 ## 配置
 主要配置producer和consumer的链接信息，其他的扩展配置可在properties中进行配置(扩展配置的信息请参照[阿里云官方参数说明](https://help.aliyun.com/product/29530.html?spm=a2c4g.11186623.6.540.34bb5a91haeVi3))
 
@@ -89,9 +96,9 @@ public class ProducerDemo{
 | 配置名称     | 是否必填 | 描述                                                         |
 | ------------ | -------- | ------------------------------------------------------------ |
 | id           | 否       | 唯一标识，为空会自动生成                                     |
-| **topic**    | **是**   | 消息队列主题ID                                               |
-| **groupId**  | **是**   | 消费者集群ID                                                 |
-| tags         | 否       | 路由作用，有SQL和TAG两种模式，目前统一使用TAG模式。默认值为全部（*） |
+| **topic**    | **是**   | 消息队列主题ID，支持占位符参数                                               |
+| **groupId**  | **是**   | 消费者集群ID，支持占位符参数                                                  |
+| tags         | 否       | 路由作用，有SQL和TAG两种模式，目前统一使用TAG模式。默认值为全部（*），支持占位符参数  |
 | autoCommit   | 否       | 是否自动提交，默认为true。 如果使用手动提交，接受消息的方式必须返回boolean类型 |
 | messageType  | 否       | 消息类型，有普通消息、顺序消息、批量消息、事务消息（暂不支持）。 默认为普通消息 |
 | messageModel | 否       | 订阅方式，有广播方式和集群方式，默认为集群方式。 广播方式弊端较多，详情见阿里云官网[集群消费和广播消费](https://help.aliyun.com/document_detail/43163.htm?spm=a2c4g.11186623.2.7.41cf5eaeWUfHUm#concept-2047071) |

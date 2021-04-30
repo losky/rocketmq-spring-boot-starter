@@ -4,10 +4,10 @@ spring:
   cloud:
     rocketmq:
       producer:
-        name-server: a
+        name-server:
         access-key: a
         secret-key: a
       consumer:
-        name-server: a
+        name-server:
         access-key: a
         secret-key: a

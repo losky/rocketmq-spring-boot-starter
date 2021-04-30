@@ -95,9 +95,9 @@ public class RocketMQListenerAnnotationBeanPostProcessor implements BeanPostProc
 
     private void processListener(MethodRocketMQListenerEndpoint endpoint, RocketMQListener listener, Method method, Object bean, String beanName) {
         endpoint.setId(getEndpointId(listener));
-        endpoint.setGroupId(listener.groupId());
-        endpoint.setTopic(listener.topic());
-        endpoint.setTags(listener.tags());
+        endpoint.setGroupId(resolvePlaceholderProperties(listener.groupId(), "groupId"));
+        endpoint.setTopic(resolvePlaceholderProperties(listener.topic(), "topic"));
+        endpoint.setTags(resolvePlaceholderProperties(listener.tags(), "tags"));
         endpoint.setAutoCommit(listener.autoCommit());
         endpoint.setMessageType(listener.messageType());
         endpoint.setMessageModel(listener.messageModel());
@@ -159,11 +159,19 @@ public class RocketMQListenerAnnotationBeanPostProcessor implements BeanPostProc
         return LOWEST_PRECEDENCE;
     }
 
+    private String resolvePlaceholderProperties(String property, String attribute) {
+        if (!StringUtils.hasText(property)) {
+            throw new IllegalArgumentException("The [" + attribute + "] must not be null. ");
+        }
+        return resolveExpressionAsString(property, attribute);
+    }
+
+
     private Method checkProxy(Method methodArg, Object bean) {
         Method method = methodArg;
         if (AopUtils.isJdkDynamicProxy(bean)) {
             try {
-                // Found a @KafkaListener method on the target class for this JDK proxy ->
+                // Found a @RocketMQListener method on the target class for this JDK proxy ->
                 // is it also present on the proxy itself?
                 method = bean.getClass().getMethod(method.getName(), method.getParameterTypes());
                 Class<?>[] proxiedInterfaces = ((Advised) bean).getProxiedInterfaces();
@@ -179,7 +187,7 @@ public class RocketMQListenerAnnotationBeanPostProcessor implements BeanPostProc
                 ReflectionUtils.handleReflectionException(ex);
             } catch (NoSuchMethodException ex) {
                 throw new IllegalStateException(String.format(
-                        "@KafkaListener method '%s' found on bean target class '%s', " +
+                        "@RocketMQListener method '%s' found on bean target class '%s', " +
                                 "but not found in any interface(s) for bean JDK proxy. Either " +
                                 "pull the method up to an interface or switch to subclass (CGLIB) " +
                                 "proxies by setting proxy-target-class/proxyTargetClass " +
@@ -188,6 +196,38 @@ public class RocketMQListenerAnnotationBeanPostProcessor implements BeanPostProc
             }
         }
         return method;
+    }
+
+
+    private String resolveExpressionAsString(String value, String attribute) {
+        Object resolved = resolveExpression(value);
+        if (resolved instanceof String) {
+            return (String) resolved;
+        } else if (resolved != null) {
+            throw new IllegalStateException("The [" + attribute + "] must resolve to a String. "
+                    + "Resolved to [" + resolved.getClass() + "] for [" + value + "]");
+        }
+        return null;
+    }
+
+    private Object resolveExpression(String value) {
+        return this.resolver.evaluate(resolve(value), this.expressionContext);
+    }
+
+    /**
+     * Resolve the specified value if possible.
+     *
+     * @param value the value to resolve
+     *
+     * @return the resolved value
+     *
+     * @see ConfigurableBeanFactory#resolveEmbeddedValue
+     */
+    private String resolve(String value) {
+        if (this.beanFactory != null && this.beanFactory instanceof ConfigurableBeanFactory) {
+            return ((ConfigurableBeanFactory) this.beanFactory).resolveEmbeddedValue(value);
+        }
+        return value;
     }
 
     private RocketMQListener findListenerAnnotations(Method method) {

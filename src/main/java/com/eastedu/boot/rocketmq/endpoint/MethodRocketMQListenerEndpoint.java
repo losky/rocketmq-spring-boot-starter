@@ -11,11 +11,6 @@ public class MethodRocketMQListenerEndpoint extends AbstractRocketMQListenerEndp
 
     private Method method;
 
-//    private MessageHandlerMethodFactory messageHandlerMethodFactory;
-//
-//    private KafkaListenerErrorHandler errorHandler;
-
-
     public MethodRocketMQListenerEndpoint() {
     }
 

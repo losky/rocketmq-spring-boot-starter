@@ -23,7 +23,7 @@ public class RockerMQAutoConfigurationTest {
     public void testSend() throws InterruptedException {
         for (int i = 0; i < 10; i++) {
 
-            rocketMQTemplate.sendAsync(new Message("test_resource_center_20210428", "*", ("hello" + i).getBytes()), new SendCallback() {
+            rocketMQTemplate.sendAsync(new Message("devp_question_service", "putway-callback", ("hello" + i).getBytes()), new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
                     System.out.println("发送成功 ===》 " + sendResult.toString());
