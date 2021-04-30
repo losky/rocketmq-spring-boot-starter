@@ -18,6 +18,29 @@
 </dependencyManagement>
 ```
 
+## 配置
+
+```yaml
+spring:
+  cloud:
+    rocketmq:
+      producer:
+        name-server: a
+        access-key: a
+        secret-key: a
+        properties:
+          xxxx: xx
+      consumer:
+        name-server: a
+        access-key: a
+        secret-key: a
+        properties:  
+          SuspendTimeMillis: 100       
+          MaxReconsumeTimes: 20                 
+
+
+```
+
 ## 消息发送
 
 阿里云的producer封装成了RocketMQTemplate， 目前支持发送普通消息、顺序消息，暂不支持事务消息
@@ -27,6 +50,11 @@
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.aliyun.openservices.ons.api.Message;
+import com.aliyun.openservices.ons.api.SendCallback;
+import com.aliyun.openservices.ons.api.SendResult;
+import com.aliyun.openservices.ons.api.OnExceptionContext;
+import com.eastedu.boot.rocketmq.RocketMQTemplate;
 
 @Service
 public class ProducerDemo{
@@ -76,9 +104,16 @@ public class ProducerDemo{
 ### 示例1
 
 ```java
+
+import java.util.List;
+import com.aliyun.openservices.ons.api.Message;
+import com.eastedu.boot.rocketmq.annotation.RocketMQListener;
+import org.springframework.stereotype.Service;
+import com.aliyun.openservices.ons.api.Message;
+
 @Service
 public class MessageConsumer {
-    
+     
     /**
     *
     * 批量消费
@@ -95,6 +130,12 @@ public class MessageConsumer {
 ### 示例2
 
 ```java
+import java.util.List;
+import com.aliyun.openservices.ons.api.Message;
+import com.eastedu.boot.rocketmq.annotation.RocketMQListener;
+import org.springframework.stereotype.Service;
+import com.aliyun.openservices.ons.api.Message;
+
 @Service
 public class MessageConsumer {
     
@@ -115,6 +156,12 @@ public class MessageConsumer {
 ### 示例3
 
 ```java
+import java.util.List;
+import com.aliyun.openservices.ons.api.Message;
+import com.eastedu.boot.rocketmq.annotation.RocketMQListener;
+import org.springframework.stereotype.Service;
+import com.aliyun.openservices.ons.api.Message;
+
 @Service
 public class MessageConsumer {
 
