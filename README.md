@@ -71,7 +71,7 @@ public class ProducerDemo{
 
 **注意：**
 * 接受消息的方法参数必须存在com.aliyun.openservices.ons.api.Message类型的参数，否则无法接受消息。    
-​* 如果是批量模式，则方法参数必须包含List<com.aliyun.openservices.ons.api.Message>类型的参数，否则无法接受消息。  
+* 如果是批量模式，则方法参数必须包含List<com.aliyun.openservices.ons.api.Message>类型的参数，否则无法接受消息。  
 
 ### 示例1
 
