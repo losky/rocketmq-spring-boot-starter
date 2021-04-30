@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: test
+  cloud:
+    rocketmq:
+      producer:
+        name-server: a
+        access-key: a
+        secret-key: a
+      consumer:
+        name-server: a
+        access-key: a
+        secret-key: a

@@ -1,0 +1,72 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties",
+      "name": "spring.cloud.rocketmq",
+      "type": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties",
+      "name": "spring.cloud.rocketmq.consumer",
+      "sourceMethod": "getConsumer()",
+      "type": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties",
+      "name": "spring.cloud.rocketmq.producer",
+      "sourceMethod": "getProducer()",
+      "type": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.consumer.access-key",
+      "description": "阿里云消息队列访问key",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.consumer.name-server",
+      "description": "阿里云消息队里服务地址",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.consumer.properties",
+      "description": "扩展配置，线程配置，超时配置，重试配置等，请参照阿里云官方文档",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.consumer.secret-key",
+      "description": "阿里云消息队列访问秘钥",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.producer.access-key",
+      "description": "阿里云消息队列访问key",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.producer.name-server",
+      "description": "阿里云消息队里服务地址",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.producer.properties",
+      "description": "扩展配置，线程配置，超时配置，重试配置等，请参照阿里云官方文档",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>"
+    },
+    {
+      "sourceType": "com.eastedu.boot.rocketmq.config.RocketMessageQueueProperties$MessageQueueProperties",
+      "name": "spring.cloud.rocketmq.producer.secret-key",
+      "description": "阿里云消息队列访问秘钥",
+      "type": "java.lang.String"
+    }
+  ]
+}
