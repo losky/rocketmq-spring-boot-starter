@@ -5,24 +5,10 @@
 
 1. 添加依赖管理
 ```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>com.eastedu.commons</groupId>
-            <artifactId>eastedu-common-dependencies</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-```
-2. 导入
-```xml
 <dependencies>
     <groupId>com.eastedu.boot</groupId>
     <artifactId>rocketmq-spring-boot-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependencies>
 ```
 ## 配置
