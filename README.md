@@ -86,7 +86,7 @@ public class ProducerDemo{
 | **topic**    | **是**   | 消息队列主题ID，支持占位符参数                                               |
 | **groupId**  | **是**   | 消费者集群ID，支持占位符参数                                                  |
 | tags         | 否       | 路由作用，有SQL和TAG两种模式，目前统一使用TAG模式。默认值为全部（*），支持占位符参数  |
-| autoCommit   | 否       | 是否自动提交，默认为true。 如果使用手动提交，接受消息的方式必须返回boolean类型 |
+| autoCommit   | 否       | 是否自动提交，默认为true。 如果使用手动提交，接受消息的方法必须返回boolean类型 |
 | messageType  | 否       | 消息类型，有普通消息、顺序消息、批量消息、事务消息（暂不支持）。 默认为普通消息 |
 | messageModel | 否       | 订阅方式，有广播方式和集群方式，默认为集群方式。 广播方式弊端较多，详情见阿里云官网[集群消费和广播消费](https://help.aliyun.com/document_detail/43163.htm?spm=a2c4g.11186623.2.7.41cf5eaeWUfHUm#concept-2047071) |
 | errorHandler | 否       | 异常处理器，发生异常统一处理逻辑。暂未实现                   |
