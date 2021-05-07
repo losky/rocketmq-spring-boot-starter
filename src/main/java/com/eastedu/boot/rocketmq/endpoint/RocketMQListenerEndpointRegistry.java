@@ -228,8 +228,7 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
             this.autoCommit = autoCommit;
             if (!autoCommit) {
                 Class returnType = getReturnType(this.method);
-                if (!returnType.isAssignableFrom(boolean.class)
-                        || !returnType.isAssignableFrom(Boolean.class)) {
+                if (!(returnType.isAssignableFrom(Boolean.TYPE) || returnType.isAssignableFrom(Boolean.class))) {
                     throw new RuntimeException("设置消息为手动提交时，Method '" + method.getName() + "' 的返回值类型必须为boolean");
                 }
             }
