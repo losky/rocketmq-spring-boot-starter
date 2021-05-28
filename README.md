@@ -9,7 +9,7 @@
 <dependencies>
     <groupId>com.eastedu.boot</groupId>
     <artifactId>rocketmq-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependencies>
 ```
 ## 配置
