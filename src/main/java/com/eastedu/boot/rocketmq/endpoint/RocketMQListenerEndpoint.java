@@ -65,4 +65,11 @@ public interface RocketMQListenerEndpoint {
      */
     MessageMode getMessageModel();
 
+    /**
+     * bean nam
+     *
+     * @return
+     */
+    String getBeanName();
+
 }

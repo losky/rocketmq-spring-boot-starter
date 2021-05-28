@@ -34,4 +34,9 @@ public class MethodRocketMQListenerEndpoint extends AbstractRocketMQListenerEndp
     public void setMethod(Method method) {
         this.method = method;
     }
+
+    @Override
+    public String getBeanName() {
+        return bean.getClass().getSimpleName();
+    }
 }

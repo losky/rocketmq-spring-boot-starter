@@ -22,6 +22,7 @@ import org.springframework.util.Assert;
 
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -36,6 +37,7 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
     private BeanFactory beanFactory;
     private BeanDefinitionRegistry registry;
     private RocketMessageQueueProperties properties;
+    private final AtomicInteger counter = new AtomicInteger(0);
 
     public void registerEndpoint(RocketMQListenerEndpoint endpoint) {
         Assert.notNull(endpoint, "Endpoint must be set");
@@ -71,6 +73,7 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
                         consumerProperties.setGroup(rocketMQListenerEndpoint.getGroupId());
                         consumerProperties.setMessageType(rocketMQListenerEndpoint.getMessageType());
                         consumerProperties.setMessageMode(rocketMQListenerEndpoint.getMessageModel());
+                        consumerProperties.setBeanName(rocketMQListenerEndpoint.getBeanName());
                         return consumerProperties;
                     }));
             for (Map.Entry<ConsumerProperties, List<RocketMQListenerEndpoint>> entry : map.entrySet()) {
@@ -93,7 +96,7 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
         builder.setDestroyMethodName("shutdown");
         builder.setLazyInit(false);
 
-        String beanName = messageType.getConsumerClass().getSimpleName();
+        String beanName = messageType.getConsumerClass().getSimpleName() + "#" + consumerProperties.getBeanName() + "-" + counter.getAndIncrement();
         this.registry.registerBeanDefinition(beanName, builder.getBeanDefinition());
         this.beanFactory.getBean(beanName);
     }
@@ -133,6 +136,7 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
         private MessageType messageType;
         private MessageMode messageMode;
         private String group;
+        private String beanName;
 
         public MessageType getMessageType() {
             return messageType;
@@ -156,6 +160,10 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
 
         public void setMessageMode(MessageMode messageMode) {
             this.messageMode = messageMode;
+        }
+
+        public String getBeanName() {
+            return beanName;
         }
 
         @Override
@@ -182,17 +190,19 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
             properties.setProperty(PropertyKeyConst.MessageModel, this.messageMode.getMode());
             return properties;
         }
+
+        public void setBeanName(String beanName) {
+            this.beanName = beanName;
+        }
     }
 
     static class RocketMQMessageListenerProxy implements InvocationHandler {
-        private final Logger logger = LoggerFactory.getLogger(RocketMQMessageListenerProxy.class);
+        private final Logger logger = LoggerFactory.getLogger("RocketMQMessageListener");
         private final Object bean;
         private final Method method;
         private final boolean autoCommit;
         private final int parameterCount;
         private MethodParameterHolder parameterHolder;
-
-        private Class returnType;
 
 
         RocketMQMessageListenerProxy(Object bean, Method method, boolean autoCommit, boolean batch) {
@@ -288,10 +298,7 @@ public class RocketMQListenerEndpointRegistry implements BeanFactoryAware, Initi
         }
 
         private Class getReturnType(Method method) {
-            if (this.returnType == null) {
-                this.returnType = method.getReturnType();
-            }
-            return this.returnType;
+            return method.getReturnType();
         }
     }
 
