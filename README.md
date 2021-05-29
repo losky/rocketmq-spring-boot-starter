@@ -141,7 +141,7 @@ public class MessageConsumer {
     * 普通消息
     * 手动提交
     **/
-    @RocketMQListener(topic = "test_resource_center_202104281", groupId = "test_resource_center_202104281", batch = false)
+    @RocketMQListener(topic = "test_resource_center_202104281", groupId = "test_resource_center_202104281", autoCommit = false)
     public boolean onMessage3(Message message, String a) {
         System.out.println("===============================");
         return true;
