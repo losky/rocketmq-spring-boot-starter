@@ -13,28 +13,28 @@ public interface RocketMQListenerEndpoint {
     /**
      * ID
      *
-     * @return
+     * @return id
      */
     String getId();
 
     /**
      * group id
      *
-     * @return
+     * @return GroupId
      */
     String getGroupId();
 
     /**
      * topic
      *
-     * @return
+     * @return topic
      */
     String getTopic();
 
     /**
      * message type
      *
-     * @return
+     * @return MessageType
      */
     default MessageType getMessageType() {
         return MessageType.NORMAL;
@@ -43,7 +43,7 @@ public interface RocketMQListenerEndpoint {
     /**
      * expression tag
      *
-     * @return
+     * @return tag
      */
     default String getTags() {
         return "*";
@@ -52,7 +52,7 @@ public interface RocketMQListenerEndpoint {
     /**
      * 是否自动提交
      *
-     * @return
+     * @return AutoCommit
      */
     default boolean isAutoCommit() {
         return true;
@@ -61,14 +61,14 @@ public interface RocketMQListenerEndpoint {
     /**
      * 订阅方式
      *
-     * @return
+     * @return MessageModel
      */
     MessageMode getMessageModel();
 
     /**
      * bean nam
      *
-     * @return
+     * @return BeanName
      */
     String getBeanName();
 

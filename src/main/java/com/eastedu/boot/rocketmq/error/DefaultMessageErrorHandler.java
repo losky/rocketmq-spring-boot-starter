@@ -5,7 +5,7 @@ package com.eastedu.boot.rocketmq.error;
  */
 public class DefaultMessageErrorHandler implements MessageErrorHandler {
     @Override
-    public void onError(Throwable throwable) throws Throwable {
-        throw throwable;
+    public void onError(Throwable throwable) {
+        // 处理异常
     }
 }

@@ -19,28 +19,28 @@ public @interface RocketMQListener {
     /**
      * topic信息
      *
-     * @return
+     * @return topic
      */
     String topic();
 
     /**
      * groupID，消费者集群ID
      *
-     * @return
+     * @return groupID
      */
     String groupId();
 
     /**
      * 订阅的tag，默认为全部
      *
-     * @return
+     * @return tags
      */
     String tags() default "*";
 
     /**
      * 自动提交
      *
-     * @return
+     * @return autoCommit
      */
     boolean autoCommit() default true;
 
@@ -48,25 +48,29 @@ public @interface RocketMQListener {
     /**
      * 异常处理器，未实现
      *
-     * @return
+     * @return errorHandler
      */
     Class<? extends MessageErrorHandler> errorHandler() default DefaultMessageErrorHandler.class;
 
     /**
      * 消息类型
      *
-     * @return
+     * @return MessageType
      */
     MessageType messageType() default MessageType.NORMAL;
 
     /**
      * 消息订阅方式，广播方式、集群方式。默认：集群方式
+     *
+     * @return messageModel
      */
-        MessageMode messageModel() default MessageMode.CLUSTERING;
+    MessageMode messageModel() default MessageMode.CLUSTERING;
 
     /**
      * 消息拉取方式，PUSH、PULL。默认：PUSH
      * 未实现
+     *
+     * @return fetchType
      */
     FetchType fetchType() default FetchType.PUSH;
 }
