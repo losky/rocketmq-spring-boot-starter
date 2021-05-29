@@ -13,6 +13,8 @@
     <version>1.1.0</version>
 </dependencies>
 ```
+
+或者直接[下载jar包](https://mvnrepository.com/artifact/com.eastedu.boot/rocketmq-spring-boot-starter)
 ## 配置
 主要配置producer和consumer的链接信息，其他的扩展配置可在properties中进行配置(扩展配置的信息请参照[阿里云官方参数说明](https://help.aliyun.com/product/29530.html?spm=a2c4g.11186623.6.540.34bb5a91haeVi3))
 
